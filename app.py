@@ -4,8 +4,7 @@ app = Flask(__name__)
 
 # Dummy user data (Replace with a database in a real-world scenario)
 users = {
-    'user1': {'companyName': 'Company1', 'email': 'user1@email.com', 'employeeId': 'E123', 'password': 'password1'},
-    'user2': {'companyName': 'Company2', 'email': 'user2@email.com', 'employeeId': 'E456', 'password': 'password2'}
+    'user1': {'companyName': 'jones and jones', 'email': 'nitin.m@hardtrac.co.in', 'employeeId': '65792', 'password': 'nitin@123'}
 }
 
 @app.route('/')
@@ -19,11 +18,15 @@ def login():
     employee_id = request.form['employeeId']
     password = request.form['password']
 
-    for user_id, user_data in users.items():
-        if user_data['companyName'] == company_name and user_data['email'] == email and \
-           user_data['employeeId'] == employee_id and user_data['password'] == password:
-            # Redirect to the next page after successful login
-            return redirect(url_for('success'))
+    # Check if user exists and credentials match
+    if 'user1' in users and \
+       users['user1']['companyName'] == company_name and \
+       users['user1']['email'] == email and \
+       users['user1']['employeeId'] == employee_id and \
+       users['user1']['password'] == password:
+        
+        # Redirect to the success page after successful login
+        return redirect(url_for('success'))
     
     # Redirect back to login page if login fails
     return redirect(url_for('index'))
